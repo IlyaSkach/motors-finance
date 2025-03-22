@@ -1,0 +1,25 @@
+.tab-menu {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tab-item {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #666;
+  border-radius: 4px;
+}
+
+.tab-item:hover {
+  background-color: #f0f0f0;
+}
+
+.tab-item.active {
+  background-color: #fdb813;
+  color: #fff;
+}
