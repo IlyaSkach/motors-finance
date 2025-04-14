@@ -22,6 +22,14 @@ const translations = {
     profile: "Профиль",
     language: "Язык",
 
+    // Заголовки страниц
+    welcomeTitle: "Добро пожаловать в единую платформу Моторс Финанс",
+    selectService: "Выберите сервис",
+    creditPageDescription: "Страница кредитования",
+    statisticsPageDescription: "Страница статистики",
+    educationPageDescription: "Страница обучения",
+    profilePageDescription: "Страница профиля",
+
     // Кнопки действий
     newCalculation: "Новый расчет",
     submit: "Отправить",
@@ -155,6 +163,14 @@ const translations = {
     profile: "Profile",
     language: "Language",
 
+    // Заголовки страниц
+    welcomeTitle: "Welcome to Motors Finance Platform",
+    selectService: "Select a service",
+    creditPageDescription: "Credit page",
+    statisticsPageDescription: "Statistics page",
+    educationPageDescription: "Education page",
+    profilePageDescription: "Profile page",
+
     // Кнопки действий
     newCalculation: "New Calculation",
     submit: "Submit",
@@ -286,6 +302,14 @@ const translations = {
     education: "التعليم",
     profile: "الملف الشخصي",
     language: "اللغة",
+
+    // Заголовки страниц
+    welcomeTitle: "مرحبًا بك في منصة موتورز فاينانس",
+    selectService: "اختر خدمة",
+    creditPageDescription: "صفحة الائتمان",
+    statisticsPageDescription: "صفحة الإحصائيات",
+    educationPageDescription: "صفحة التعليم",
+    profilePageDescription: "صفحة الملف الشخصي",
 
     // Кнопки действий
     newCalculation: "حساب جديد",
