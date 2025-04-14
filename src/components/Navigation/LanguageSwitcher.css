@@ -1,0 +1,60 @@
+.language-switcher {
+  margin-top: auto;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.language-title {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.language-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.language-button {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.5rem;
+  cursor: pointer;
+  flex: 1;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.language-button:hover {
+  background-color: #f0f0f0;
+}
+
+.language-button.active {
+  background-color: #fdb813;
+  color: white;
+  border-color: #fdb813;
+}
+
+/* Стили для мобильной версии */
+@media (max-width: 768px) {
+  .language-switcher {
+    margin-top: 1rem;
+    padding: 1rem 0;
+  }
+
+  .language-options {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+/* RTL стили */
+html.rtl .language-switcher {
+  direction: rtl;
+}
+
+html.rtl .language-button {
+  font-family: "Arial", sans-serif;
+}

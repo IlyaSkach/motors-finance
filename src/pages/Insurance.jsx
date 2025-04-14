@@ -3,8 +3,10 @@ import "../styles/Insurance.css";
 import Button from "../components/Button/Button";
 import Modal from "../components/Modal/Modal";
 import InsuranceForm from "../components/InsuranceForm/InsuranceForm";
+import { useLanguage } from "../context/LanguageContext";
 
 const Insurance = () => {
+  const { translate } = useLanguage();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formsList, setFormsList] = useState([]);
   const [editingForm, setEditingForm] = useState(null);
@@ -64,17 +66,13 @@ const Insurance = () => {
     }));
   };
 
-  // Функция для форматирования ФИО
-  const formatName = (lastName, firstName, middleName) => {
-    const firstNameInitial = firstName ? firstName.charAt(0) + "." : "";
-    const middleNameInitial = middleName ? middleName.charAt(0) + "." : "";
-    return `${lastName} ${firstNameInitial}${middleNameInitial}`;
-  };
-
   // Фильтрация списка форм
   const filteredForms = useMemo(() => {
     return formsList.filter((form) => {
-      const matchesLastName = form.lastName
+      // Проверяем наличие поля lastName для безопасного доступа
+      const lastName = form.lastName || "";
+
+      const matchesLastName = lastName
         .toLowerCase()
         .includes(filters.lastName.toLowerCase());
       const matchesStatus =
@@ -86,11 +84,25 @@ const Insurance = () => {
     });
   }, [formsList, filters]);
 
+  // Функция для форматирования ФИО с проверкой на наличие полей
+  const formatName = (lastName, firstName, middleName) => {
+    // Если есть полное имя собственника, используем его
+    if (lastName?.owner?.fullName) {
+      return lastName.owner.fullName;
+    }
+
+    // Иначе используем старый формат данных
+    const lastNameStr = lastName || "";
+    const firstNameInitial = firstName ? firstName.charAt(0) + "." : "";
+    const middleNameInitial = middleName ? middleName.charAt(0) + "." : "";
+    return `${lastNameStr} ${firstNameInitial}${middleNameInitial}`;
+  };
+
   return (
     <div className="page-content">
-      <h1>Страхование</h1>
+      <h1>{translate("insurance")}</h1>
       <Button
-        text="Новый расчет"
+        text={translate("newCalculation")}
         onClick={handleNewCalculation}
         variant="primary"
         size="medium"
@@ -103,7 +115,7 @@ const Insurance = () => {
             name="lastName"
             value={filters.lastName}
             onChange={handleFilterChange}
-            placeholder="Поиск по фамилии"
+            placeholder={translate("searchByLastName")}
             className="filter-input"
           />
         </div>
@@ -114,9 +126,9 @@ const Insurance = () => {
             onChange={handleFilterChange}
             className="filter-select"
           >
-            <option value="all">Все статусы</option>
-            <option value="completed">Отправленные</option>
-            <option value="incomplete">Не заполненные</option>
+            <option value="all">{translate("allStatuses")}</option>
+            <option value="completed">{translate("sent")}</option>
+            <option value="incomplete">{translate("incomplete")}</option>
           </select>
         </div>
       </div>
@@ -130,13 +142,19 @@ const Insurance = () => {
             <div className="form-content">
               <div className="form-info">
                 <span className="form-name">
-                  {formatName(form.lastName, form.firstName, form.middleName)}
+                  {form.owner && form.owner.fullName
+                    ? form.owner.fullName
+                    : formatName(
+                        form.lastName,
+                        form.firstName,
+                        form.middleName
+                      )}
                 </span>
                 <span className="form-status">
-                  Статус:{" "}
+                  {translate("status")}:{" "}
                   {form.status === "completed"
-                    ? "Форма отправлена"
-                    : "Форма не заполнена полностью"}
+                    ? translate("formSent")
+                    : translate("formIncomplete")}
                 </span>
                 <span className="form-date">{form.date}</span>
               </div>
@@ -145,7 +163,7 @@ const Insurance = () => {
                   <button
                     className="action-button edit-button"
                     onClick={() => handleEditForm(form)}
-                    title="Редактировать"
+                    title={translate("edit")}
                   >
                     ✎
                   </button>
@@ -153,7 +171,7 @@ const Insurance = () => {
                 <button
                   className="action-button delete-button"
                   onClick={() => handleDeleteForm(form.id)}
-                  title="Удалить"
+                  title={translate("delete")}
                 >
                   ×
                 </button>

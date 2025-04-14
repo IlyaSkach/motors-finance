@@ -1,3 +1,22 @@
+/* Добавляем стили для плавного перехода при изменении состояния меню */
+body {
+  transition: padding-top 0.3s ease;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 60px; /* Для фиксированного навбара */
+  }
+
+  .main-content {
+    min-height: calc(100vh - 60px);
+  }
+}
+
 .app {
   display: flex;
   min-height: 100vh;
@@ -35,4 +54,34 @@
   .page-content {
     padding: 1rem;
   }
+}
+
+/* RTL поддержка */
+html.rtl .app {
+  flex-direction: row-reverse;
+}
+
+html.rtl .main-content {
+  direction: rtl;
+}
+
+html.rtl input,
+html.rtl textarea,
+html.rtl select {
+  text-align: right;
+}
+
+/* Общие стили для RTL */
+html.rtl .form-section h3,
+html.rtl .form-group label {
+  text-align: right;
+}
+
+html.rtl .checkbox-item,
+html.rtl .radio-item {
+  flex-direction: row-reverse;
+}
+
+html.rtl .form-buttons {
+  flex-direction: row-reverse;
 }
